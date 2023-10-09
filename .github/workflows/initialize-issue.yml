@@ -5,6 +5,10 @@
 # https://docs.github.com/en/rest/overview/github-event-types?apiVersion=2022-11-28#issuesevent
 # https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
 
+# vars is repository variables
+# env is environment variables
+# no idea how to call organization variables
+
 name: Init new issue tickets
 run-name: New feature - ${{github.event.issue.title}}
 
