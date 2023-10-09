@@ -10,8 +10,8 @@ inputs:
  repo:
   description: 'The name of the repository'
   required: true
- issue_number:
-  description: 'The number of the issue'
+ issue_id:
+  description: 'The id of the issue'
   required: true
  label:
   description: 'The desired label for the issue'

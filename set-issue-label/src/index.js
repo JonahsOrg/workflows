@@ -16,7 +16,7 @@ async function run() {
    **/
   const owner = core.getInput('owner', { required: true });
   const repo = core.getInput('repo', { required: true });
-  const issueNumber = core.getInput('issue_number', { required: true });
+  const issueId = core.getInput('issue_id', { required: true });
   const token = core.getInput('token', { required: true });
   const label = core.getInput('label', { required: true });
 
@@ -33,13 +33,10 @@ async function run() {
   // fetch the ids of the parsed label and issue number
   const { repository } = await octokit.graphql(
    `
-    query FetchLabelAndIssueIds($owner: String!, $repo: String!, $labelName: String!, $issueNumber: Int!) {
+    query FetchLabelAndIssueIds($owner: String!, $repo: String!, $labelName: String!) {
       repository(owner: $owner, name: $repo) {
         label(name: $labelName) {
           id # label id
-        }
-        issue(number: $issueNumber) {
-          id # issue id
         }
       }
     }
@@ -47,8 +44,7 @@ async function run() {
    {
     owner,
     repo,
-    labelName: label,
-    issueNumber: Number(issueNumber)
+    labelName: label
    }
   );
 
@@ -56,8 +52,6 @@ async function run() {
 
   // grab the ids
   const labelId = repository?.label?.id;
-  const issueId = repository?.issue?.id;
-
   if (!labelId || !issueId) return;
 
   // labels the issue
