@@ -1,0 +1,63 @@
+# https://docs.github.com/en/actions/learn-github-actions/contexts
+# https://docs.github.com/en/webhooks/webhook-events-and-payloads
+# https://github.com/alex-page/github-project-automation-plus
+# https://github.com/actions/add-to-project
+# https://docs.github.com/en/rest/overview/github-event-types?apiVersion=2022-11-28#issuesevent
+
+name: Init new issue tickets
+run-name: New feature - ${{github.event.issue.title}}
+
+on:
+ issues:
+  types: [opened]
+
+jobs:
+ test-javascript:
+  name: JavaScript Tests
+  runs-on: ubuntu-latest
+
+  steps:
+   - name: Checkout
+     id: checkout
+     uses: actions/checkout@v4
+
+   - name: Setup Node.js
+     id: setup-node
+     uses: actions/setup-node@v3
+     with:
+      node-version: 20
+      cache: npm
+
+   - name: Install Dependencies
+     id: npm-ci
+     run: npm ci
+
+   - name: Check Format
+     id: npm-format-check
+     run: npm run format:check
+
+   - name: Lint
+     id: npm-lint
+     run: npm run lint
+
+ initialize-new-issue:
+  runs-on: ubuntu-latest
+  name: initialize an issue ticket
+  steps:
+   - name: Checkout
+     id: checkout
+     uses: actions/checkout@v4
+
+   - name: submodule_action
+     id: submodule_action
+     uses: ./submodule_workflow/action.yml
+     with:
+      owner: ${{ github.repository_owner }}
+      repo: ${{ github.event.repository.name }}
+      token: ${{ secrets.GITHUB_TOKEN }}
+      issue_number: ${{ github.event.issue.number }}
+      issue_title: ${{ github.event.issue.title }}
+
+   - name: Print Output
+     id: output
+     run: echo "completed function call"

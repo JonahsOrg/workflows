@@ -1,0 +1,35 @@
+{
+ "name": "submodule_workflow",
+ "version": "0.0.1",
+ "description": "probably going to be use for feature initialization on a submodule",
+ "main": "index.js",
+ "exports": {
+  ".": "./dist/index.js"
+ },
+ "scripts": {
+  "bundle": "npm run format:write && npm run package",
+  "format:write": "prettier --write **/*.js",
+  "format:check": "prettier --check **/*.js",
+  "lint": "npx eslint . -c ./.github/linters/.eslintrc.yml",
+  "package": "ncc build src/index.js --license licenses.txt",
+  "all": "npm run format:write && npm run lint && npm run package"
+ },
+ "eslintConfig": {
+  "extends": "./.github/linters/.eslintrc.yml"
+ },
+ "author": "Jonah Jackson",
+ "license": "ISC",
+ "dependencies": {
+  "@actions/core": "^1.10.1",
+  "@actions/github": "^5.1.1"
+ },
+ "devDependencies": {
+  "@babel/core": "^7.22.19",
+  "@babel/eslint-parser": "^7.22.15",
+  "@babel/preset-env": "^7.22.15",
+  "@vercel/ncc": "^0.38.0",
+  "eslint": "^8.49.0",
+  "eslint-plugin-github": "^4.10.0",
+  "prettier": "^3.0.3"
+ }
+}
