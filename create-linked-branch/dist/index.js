@@ -32850,7 +32850,12 @@ async function run() {
    }
   );
 
+  console.log(repository);
+
   const latestCommitSHA = repository?.ref?.target?.history?.edges[0]?.node?.oid;
+
+  console.log(latestCommitSHA);
+
   if (!latestCommitSHA) return console.log('could not get the latestCommitSHA');
 
   const newBranchName = `refs/heads/${issueTitle.split(' ').join('-')}`;
