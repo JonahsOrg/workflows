@@ -2,6 +2,13 @@
 Central hub for CI/CD workflows across our projects. Ensures consistency, streamlines updates, and fosters best practices. Workflows are versioned for reliable integration and deployment. Facilitates optimized automation for all repositories.
 
 
+## Todo
+- [ ] Create outputs for the actions indicating whether or not they were successful
+- [ ] Add in error handling
+- [ ] Create an environment variable for the label and use it to create / add a label to a node
+
+
+## Create and publish a release through the command line
 | Step | Description | Command | Example |
 |------|-------------|---------|---------|
 | 1 | Ensure you're on the correct branch | `git checkout <branch-name>` | `git checkout main` |
