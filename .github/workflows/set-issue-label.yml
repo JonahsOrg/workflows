@@ -48,15 +48,15 @@ jobs:
      id: checkout
      uses: actions/checkout@v4
 
-   - name: submodule_action
-     id: submodule_action
-     uses: ./submodule_workflow
+   - name: set label on issue
+     id: set-issue-label
+     uses: ./set-issue-label
      with:
       owner: ${{ github.repository_owner }}
       repo: ${{ github.event.repository.name }}
       token: ${{ secrets.GITHUB_TOKEN }}
       issue_number: ${{ github.event.issue.number }}
-      issue_title: ${{ github.event.issue.title }}
+      label: 'test'
 
    - name: Print Output
      id: output

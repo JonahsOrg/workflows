@@ -1,7 +1,7 @@
 {
- "name": "submodule_workflow",
+ "name": "set-issue-label",
  "version": "0.0.1",
- "description": "probably going to be use for feature initialization on a submodule",
+ "description": "set a specified label on a newly created issue",
  "main": "index.js",
  "exports": {
   ".": "./dist/index.js"

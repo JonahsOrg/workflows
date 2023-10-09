@@ -4,8 +4,6 @@
 const core = require('@actions/core');
 // const github = require('@actions/github');
 
-// import * as github from "@actions/github"
-
 /**
  * The main function for the action.
  * @returns {Promise<void>} Resolves when the action is complete.
@@ -20,14 +18,14 @@ async function run() {
   const repo = core.getInput('repo', { required: true });
   const issueNumber = core.getInput('issue_number', { required: true });
   const token = core.getInput('token', { required: true });
-  const issueTitle = core.getInput('issue_title', { required: true });
+  const label = core.getInput('label', { required: true });
 
   console.log({
    owner,
    repo,
    issueNumber,
    token,
-   issueTitle
+   label
   });
 
   /**
@@ -45,6 +43,4 @@ async function run() {
  }
 }
 
-module.exports = {
- run
-};
+run();
