@@ -1,0 +1,16 @@
+name: 'Create a new comment'
+description: 'Creates a comment for a new issue'
+author: 'jonah jackson'
+
+# Define your inputs here.
+inputs:
+  token:
+    description: 'The token to use to access the GitHub API'
+    required: true
+  node_id:
+    description: 'The id of the node to add a comment to'
+    required: true
+
+runs:
+  using: node20
+  main: dist/index.js

@@ -1,22 +1,22 @@
-name: 'Create a new linked branch on an issue'
-description: 'Creates a linked branch for a new issue'
+name: 'Create a new pull request'
+description: 'Creates a pull request for a new issue'
 author: 'jonah jackson'
 
 # Define your inputs here.
 inputs:
- token:
-  description: 'The token to use to access the GitHub API'
-  required: true
- repo_id:
-  description: 'The id of the repository'
-  required: true
- issue_title:
-  description: 'The title of the issue'
-  required: true
- merge_into_branch:
-  description: 'The name of the branch to merge the new branch into'
-  required: true
+  token:
+    description: 'The token to use to access the GitHub API'
+    required: true
+  repo_id:
+    description: 'The id of the repository'
+    required: true
+  issue_title:
+    description: 'The title of the issue'
+    required: true
+  merge_into_branch:
+    description: 'The name of the branch to merge the new branch into'
+    required: true
 
 runs:
- using: node20
- main: dist/index.js
+  using: node20
+  main: dist/index.js
