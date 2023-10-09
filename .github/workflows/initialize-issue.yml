@@ -25,37 +25,37 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
-      # - name: set label on issue
-      #   id: set-issue-label
-      #   uses: ./set-issue-label
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     owner: ${{ github.repository_owner }}
-      #     repo: ${{ github.event.repository.name }}
-      #     issue_id: ${{ github.event.issue.node_id }}
-      #     label: 'test'
+      - name: set label on issue
+        id: set-issue-label
+        uses: ./set-issue-label
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          issue_id: ${{ github.event.issue.node_id }}
+          label: 'test'
 
-      # - name: create a linked branch
-      #   id: create-linked-branch
-      #   uses: ./create-linked-branch
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     owner: ${{ github.repository_owner }}
-      #     repo: ${{ github.event.repository.name }}
-      #     repo_id: ${{ github.event.repository.node_id }}
-      #     issue_id: ${{ github.event.issue.node_id }}
-      #     issue_title: ${{ github.event.issue.title }}
-      #     branch_to_copy: 'main'
+      - name: create a linked branch
+        id: create-linked-branch
+        uses: ./create-linked-branch
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          repo_id: ${{ github.event.repository.node_id }}
+          issue_id: ${{ github.event.issue.node_id }}
+          issue_title: ${{ github.event.issue.title }}
+          branch_to_copy: 'main'
 
-      # - name: create a pull request
-      #   id: create-pr
-      #   if: steps.create-linked-branch.outcome == 'success'
-      #   uses: ./create-pr
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     repo_id: ${{ github.event.repository.node_id }}
-      #     issue_title: ${{ github.event.issue.title }}
-      #     merge_into_branch: 'development'
+      - name: create a pull request
+        id: create-pr
+        if: steps.create-linked-branch.outcome == 'success'
+        uses: ./create-pr
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repo_id: ${{ github.event.repository.node_id }}
+          issue_title: ${{ github.event.issue.title }}
+          merge_into_branch: 'development'
 
       - name: create comment on new issue
         id: create-comment
