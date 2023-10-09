@@ -5,7 +5,8 @@ Central hub for CI/CD workflows across our projects. Ensures consistency, stream
 ## Todo
 - [ ] Create outputs for the actions indicating whether or not they were successful
 - [ ] Add in error handling
-- [ ] Create an environment variable for the label and use it to create / add a label to a node
+- [x] Create an environment variable for the label and use it to create / add a label to a node
+- [ ] Make a regex pattern that branch names have to fit in order to be created
 
 
 ## Create and publish a release through the command line
