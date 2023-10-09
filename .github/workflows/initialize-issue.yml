@@ -43,6 +43,15 @@ jobs:
       issue_title: ${{ github.event.issue.title }}
       branch_to_copy: 'main'
 
+   - name: create a pull request
+     id: create-pr
+     uses: ./create-pr
+     with:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      repo_id: ${{ github.event.repository.node_id }}
+      issue_title: ${{ github.event.issue.title }}
+      merge_into_branch: 'development'
+
    - name: Print Output
      id: output
      run: echo "completed function call"
