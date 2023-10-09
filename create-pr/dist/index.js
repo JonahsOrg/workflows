@@ -32822,8 +32822,8 @@ async function run() {
     `,
    {
     repoId,
-    headRef: mergeIntoBranch,
-    baseRef: `${issueTitle.split(' ').join('-')}`,
+    headRef: `${issueTitle.split(' ').join('-')}`,
+    baseRef: mergeIntoBranch,
     pullName: `New feature - ${issueTitle}`
    }
   );
