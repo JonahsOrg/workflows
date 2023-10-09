@@ -20,15 +20,15 @@ jobs:
      id: checkout
      uses: actions/checkout@v4
 
-   - name: set label on issue
-     id: set-issue-label
-     uses: ./set-issue-label
-     with:
-      token: ${{ secrets.GITHUB_TOKEN }}
-      owner: ${{ github.repository_owner }}
-      repo: ${{ github.event.repository.name }}
-      issue_id: ${{ github.event.issue.node_id }}
-      label: 'test'
+   #  - name: set label on issue
+   #    id: set-issue-label
+   #    uses: ./set-issue-label
+   #    with:
+   #     token: ${{ secrets.GITHUB_TOKEN }}
+   #     owner: ${{ github.repository_owner }}
+   #     repo: ${{ github.event.repository.name }}
+   #     issue_id: ${{ github.event.issue.node_id }}
+   #     label: 'test'
 
    - name: create a linked branch
      id: create-linked-branch
