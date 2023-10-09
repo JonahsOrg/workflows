@@ -40,7 +40,7 @@ jobs:
       repo_id: ${{ github.event.repository.id }}
       issue_id: ${{ github.event.issue.node_id }}
       issue_title: ${{ github.event.issue.title }}
-      branch_to_copy: 'master'
+      branch_to_copy: 'main'
 
    - name: Print Output
      id: output
