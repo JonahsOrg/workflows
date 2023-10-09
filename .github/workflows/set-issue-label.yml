@@ -27,7 +27,7 @@ jobs:
       owner: ${{ github.repository_owner }}
       repo: ${{ github.event.repository.name }}
       token: ${{ secrets.GITHUB_TOKEN }}
-      issue_id: ${{ github.event.issue.id }}
+      issue_id: ${{ github.event.issue.node_id }}
       label: 'test'
 
    - name: Print Output
