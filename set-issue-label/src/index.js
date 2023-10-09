@@ -33,7 +33,7 @@ async function run() {
   // fetch the ids of the parsed label and issue number
   const { repository } = await octokit.graphql(
    `
-    query FetchLabelAndIssueIds($owner: String!, $repo: String!, $labelName: String!, $issueNumber: Int!, $branchName: String!) {
+    query FetchLabelAndIssueIds($owner: String!, $repo: String!, $labelName: String!, $issueNumber: Int!) {
       repository(owner: $owner, name: $repo) {
         label(name: $labelName) {
           id # label id
