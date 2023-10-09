@@ -3,6 +3,7 @@
 # https://github.com/alex-page/github-project-automation-plus
 # https://github.com/actions/add-to-project
 # https://docs.github.com/en/rest/overview/github-event-types?apiVersion=2022-11-28#issuesevent
+# https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
 
 name: Init new issue tickets
 run-name: New feature - ${{github.event.issue.title}}
