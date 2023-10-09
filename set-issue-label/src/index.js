@@ -20,14 +20,6 @@ async function run() {
   const token = core.getInput('token', { required: true });
   const label = core.getInput('label', { required: true });
 
-  console.log({
-   owner,
-   repo,
-   issueNumber,
-   token,
-   label
-  });
-
   /**
    * Now we need to create an instance of Octokit which will use to call
    * GitHub's REST API endpoints.
@@ -36,7 +28,55 @@ async function run() {
    * You can find all the information about how to use Octokit here:
    * https://octokit.github.io/rest.js/v18
    **/
-  // const octokit = new github.getOctokit(token);
+  const octokit = new github.getOctokit(token);
+
+  // fetch the ids of the parsed label and issue number
+  const { repository } = await octokit.graphql(
+   `
+    query FetchLabelAndIssueIds($owner: String!, $repo: String!, $labelName: String!, $issueNumber: Int!, $branchName: String!) {
+      repository(owner: $owner, name: $repo) {
+        label(name: $labelName) {
+          id # label id
+        }
+        issue(number: $issueNumber) {
+          id # issue id
+        }
+      }
+    }
+  `,
+   {
+    owner,
+    repo,
+    labelName: label,
+    issueNumber: Number(issueNumber),
+    branchName: branchToCopy
+   }
+  );
+
+  if (!repository) return;
+
+  // grab the ids
+  const labelId = repository?.label?.id;
+  const issueId = repository?.issue?.id;
+
+  if (!labelId || !issueId) return;
+
+  // labels the issue
+  await octokit.graphql(
+   `
+    mutation SetLabelOnIssue( $issueId: ID!, $labelId: ID! )  {
+      addLabelsToLabelable(input: {labelableId: $issueId, labelIds: [$labelId]}) {
+        clientMutationId
+      }
+    }
+    `,
+   {
+    issueId,
+    labelId
+   }
+  );
+
+  console.log('successfully labeled the issue');
  } catch (error) {
   // Fail the workflow run if an error occurs
   core.setFailed(error.message);
