@@ -48,8 +48,7 @@ async function run() {
     owner,
     repo,
     labelName: label,
-    issueNumber: Number(issueNumber),
-    branchName: branchToCopy
+    issueNumber: Number(issueNumber)
    }
   );
 
