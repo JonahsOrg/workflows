@@ -22,6 +22,16 @@ async function run() {
   const issueTitle = core.getInput('issue_title', { required: true });
   const branchToCopy = core.getInput('branch_to_copy', { required: true });
 
+  console.log({
+   token,
+   owner,
+   repo,
+   repoId,
+   issueId,
+   issueTitle,
+   branchToCopy
+  });
+
   // this is the branch that is copied for each new issue branch when it is opened
   // has to be formatted as refs/heads/<branch-name>
 
@@ -66,7 +76,7 @@ async function run() {
   );
 
   const latestCommitSHA = repository?.ref?.target?.history?.edges[0]?.node?.oid;
-  if (!latestCommitSHA) return;
+  if (!latestCommitSHA) return console.log('could not get the latestCommitSHA');
 
   const newBranchName = `refs/heads/${issueTitle.split(' ').join('-')}`;
 
@@ -88,8 +98,9 @@ async function run() {
    }
   );
 
-  console.log('successfully labeled the issue');
+  console.log('successfully created the linked branch');
  } catch (error) {
+  console.log(error);
   // Fail the workflow run if an error occurs
   core.setFailed(error.message);
  }

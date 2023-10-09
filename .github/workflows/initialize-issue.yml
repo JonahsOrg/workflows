@@ -12,9 +12,9 @@ on:
   types: [opened]
 
 jobs:
- set-label:
+ init-issue:
   runs-on: ubuntu-latest
-  name: set label on labelable
+  name: initialize new issue ticket
   steps:
    - name: Checkout
      id: checkout
