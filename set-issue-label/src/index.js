@@ -2,7 +2,7 @@
 
 // packages
 const core = require('@actions/core');
-// const github = require('@actions/github');
+const github = require('@actions/github');
 
 /**
  * The main function for the action.
