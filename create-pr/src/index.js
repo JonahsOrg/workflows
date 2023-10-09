@@ -30,7 +30,7 @@ async function run() {
    **/
   const octokit = new github.getOctokit(token);
 
-  const res = await octokit.graphql(
+  /* const res =  */ await octokit.graphql(
    `
     mutation CreateNewPullRequest ($pullName: String!, $headRef: String!, $baseRef: String!, $repoId: ID!) {
       createPullRequest(
@@ -53,7 +53,7 @@ async function run() {
    }
   );
 
-  const pullRequestURL = res?.createPullRequest?.pullRequest?.permalink;
+  /*   const pullRequestURL = res?.createPullRequest?.pullRequest?.permalink;
   const pullRequestNum = res?.createPullRequest?.pullRequest?.number;
   const pullRequestId = res?.createPullRequest?.pullRequest?.id;
 
@@ -61,7 +61,7 @@ async function run() {
    pullRequestURL,
    pullRequestNum,
    pullRequestId
-  });
+  }); */
 
   console.log('successfully created the pull request');
  } catch (error) {
