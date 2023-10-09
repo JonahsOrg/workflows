@@ -13,8 +13,8 @@ inputs:
  issue_number:
   description: 'The number of the issue'
   required: true
- issue_title:
-  description: 'The title of the issue'
+ label:
+  description: 'The desired label for the issue'
   required: true
  token:
   description: 'The token to use to access the GitHub API'
