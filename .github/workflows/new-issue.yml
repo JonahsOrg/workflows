@@ -50,7 +50,7 @@ jobs:
 
    - name: submodule_action
      id: submodule_action
-     uses: ./submodule_workflow/action.yml
+     uses: ./submodule_workflow
      with:
       owner: ${{ github.repository_owner }}
       repo: ${{ github.event.repository.name }}
