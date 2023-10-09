@@ -22,16 +22,6 @@ async function run() {
   const issueTitle = core.getInput('issue_title', { required: true });
   const branchToCopy = core.getInput('branch_to_copy', { required: true });
 
-  console.log({
-   token,
-   owner,
-   repo,
-   repoId,
-   issueId,
-   issueTitle,
-   branchToCopy
-  });
-
   // this is the branch that is copied for each new issue branch when it is opened
   // has to be formatted as refs/heads/<branch-name>
 
@@ -75,16 +65,10 @@ async function run() {
    }
   );
 
-  console.log(repository);
-
   const latestCommitSHA = repository?.ref?.target?.history?.edges[0]?.node?.oid;
-
-  console.log(latestCommitSHA);
-
   if (!latestCommitSHA) return console.log('could not get the latestCommitSHA');
 
   const newBranchName = `refs/heads/${issueTitle.split(' ').join('-')}`;
-
   await octokit.graphql(
    `
       mutation CreateNewBranch($branch: String!, $sha: GitObjectID!, $assignToIssue: ID!, $repoId: ID!) {
