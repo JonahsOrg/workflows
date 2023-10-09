@@ -21,8 +21,8 @@ inputs:
   required: true
 
 # Define your outputs here.
-outputs:
- test: 'things happened'
+# outputs:
+#  test: 'things happened'
 
 runs:
  using: node20
