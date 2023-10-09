@@ -1,5 +1,5 @@
-name: 'Initialize a new feature branch'
-description: 'Creates and adds the basic requirements for a new feature branch based on an issue ticket'
+name: 'Set issue label'
+description: 'Adds the specified label to the specified issue'
 author: 'jonah jackson'
 
 # Define your inputs here.
@@ -19,10 +19,6 @@ inputs:
  token:
   description: 'The token to use to access the GitHub API'
   required: true
-
-# Define your outputs here.
-# outputs:
-#  test: 'things happened'
 
 runs:
  using: node20
