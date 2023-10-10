@@ -10,8 +10,8 @@ inputs:
   repo_id:
     description: 'The id of the repository'
     required: true
-  issue_title:
-    description: 'The title of the issue'
+  linked_branch_name:
+    description: 'The linked branch name of the issue'
     required: true
   merge_into_branch:
     description: 'The name of the branch to merge the new branch into'

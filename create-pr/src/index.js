@@ -16,7 +16,7 @@ async function run() {
      **/
     const token = core.getInput('token', { required: true });
     const repoId = core.getInput('repo_id', { required: true });
-    const issueTitle = core.getInput('issue_title', { required: true });
+    const linkedBranchName = core.getInput('linked_branch_name', { required: true });
     const mergeIntoBranch = core.getInput('merge_into_branch', { required: true });
     // mergeIntoBranch syntax ex. "staging", "development"
 
@@ -47,7 +47,7 @@ async function run() {
     `,
       {
         repoId,
-        headRef: `${issueTitle.split(' ').join('-')}`,
+        headRef: linkedBranchName,
         baseRef: mergeIntoBranch,
         pullName: `New feature - ${issueTitle}`
       }

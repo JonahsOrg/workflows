@@ -66,14 +66,8 @@ async function run() {
         createLinkedBranch(
           input: {name: $branch, oid: $sha, repositoryId: $repoId, issueId: $assignToIssue}
         ) {
-          issue {
-            id
-            title
-          }
           linkedBranch {
-            id
             ref {
-              prefix
               name
             }
           }
@@ -88,8 +82,8 @@ async function run() {
       }
     );
 
-    console.log(res);
-    console.log(res?.issue, res?.linkedBranch, res?.linkedBranch?.ref);
+    const linkedBranchName = res?.linkedBranch?.ref?.name;
+    core.setOutput('linkedBranchName', linkedBranchName);
 
     console.log('successfully created the linked branch');
   } catch (error) {
