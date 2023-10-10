@@ -62,7 +62,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           node_id: ${{ github.event.issue.node_id }}
-          issue_id: ${{ github.event.issue }}
 
       # - name: change the status of a linked project card
       #   id: set-status
