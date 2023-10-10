@@ -55,20 +55,22 @@ jobs:
           issue_title: ${{ github.event.issue.title }}
           merge_into_branch: 'development'
 
+      - name: change the status of a linked project card
+        id: set-status
+        uses: ./set-status
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue_id: ${{ github.event.issue.node_id }}
+
       - name: create comment on new issue
         id: create-comment
         uses: ./create-comment
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           node_id: ${{ github.event.issue.node_id }}
-
-      # - name: change the status of a linked project card
-      #   id: set-status
-      #   uses: ./set-status
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     owner: ${{ github.repository_owner }}
-      #     repo: ${{ github.event.repository.name }}
+          # label_status: ${{steps.set-issue-label.outcome}}
+          # branch_status: ${{steps.create-linked-branch.outcome}}
+          # pr_status: ${{steps.create-pr.outcome}}
 
       - name: Print Output
         id: output
