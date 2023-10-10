@@ -32805,10 +32805,10 @@ async function run() {
     const octokit = new github.getOctokit(token);
 
     // fetch the ids of the parsed label and issue number
-    const { node } = await octokit.graphql(
+    const res = await octokit.graphql(
       `
-      query FetchIds {
-        node(id: "I_kwDOKdB3k85zYVRF") {
+      query FetchIds($issueId: ID!, $statusName: String!) {
+        node(id: $issueId) {
           ... on Issue {
             projectItems(first: 10) {
               nodes {
@@ -32822,7 +32822,7 @@ async function run() {
                       field {
                         ... on ProjectV2SingleSelectField {
                           id # id of the field
-                          options (names: ["In Development"]) {
+                          options (names: [$statusName]) {
                             id  # id of specified field
                           }
                         }
@@ -32842,17 +32842,19 @@ async function run() {
       }
     );
 
-    if (!node) return;
+    console.log(res);
 
-    // grab the ids
-    const cardId = node?.projectItems[0]?.node?.id;
-    const projectId = node?.projectItems[0]?.node?.project?.id;
-    console.log(node);
-    console.log(node?.projectItems[0]?.node);
+    // if (!node) return;
 
-    if (!cardId || !projectId) return;
+    // // grab the ids
+    // const cardId = node?.projectItems[0]?.node?.id;
+    // const projectId = node?.projectItems[0]?.node?.project?.id;
+    // console.log(node);
+    // console.log(node?.projectItems[0]?.node);
 
-    console.log({ cardId, projectId });
+    // if (!cardId || !projectId) return;
+
+    // console.log({ cardId, projectId });
 
     // const tempPayload = { singleSelectOptionId: '4b2fdd91' };
 
