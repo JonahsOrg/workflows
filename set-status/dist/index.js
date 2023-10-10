@@ -32807,8 +32807,8 @@ async function run() {
     // fetch the ids of the parsed label and issue number
     const { node } = await octokit.graphql(
       `
-      query FetchIds($issueId: ID!) {
-        node(id: $issueId) {
+      query FetchIds {
+        node(id: "I_kwDOKdB3k85zYVRF") {
           ... on Issue {
             projectItems(first: 10) {
               nodes {
