@@ -15,8 +15,6 @@ async function run() {
      * and store them in variables for us to use.
      **/
     const token = core.getInput('token', { required: true });
-    const owner = core.getInput('owner', { required: true });
-    const repo = core.getInput('repo', { required: true });
     const repoId = core.getInput('repo_id', { required: true });
     const issueId = core.getInput('issue_id', { required: true });
     const issueTitle = core.getInput('issue_title', { required: true });
@@ -38,34 +36,28 @@ async function run() {
      **/
     const octokit = new github.getOctokit(token);
 
-    const { repository } = await octokit.graphql(
+    const { node } = await octokit.graphql(
       `
-    query FetchLatestCommitOfBranch($owner: String!, $repo: String!, $branchName: String!) {
-      repository(owner: $owner, name: $repo) {
-        ref(qualifiedName: $branchName) {
-          target {
-            ... on Commit {
-              history(first: 1) {
-                edges {
-                  node {
-                    oid # id of latest commit on a branch
-                  }
-                }
+      query FetchLatestCommitOfBranch($repoId: ID!, $branchName: String!) {
+        node(id: $repoId) {
+          ... on Repository {
+            ref(qualifiedName: $branchName) {
+              target {
+                oid
               }
             }
           }
         }
       }
-    }
-  `,
+    `,
       {
         owner,
-        repo,
+        repoId,
         branchName: branchToCopyRef
       }
     );
 
-    const latestCommitSHA = repository?.ref?.target?.history?.edges[0]?.node?.oid;
+    const latestCommitSHA = node?.ref?.target?.oid;
     if (!latestCommitSHA) return console.log('could not get the latestCommitSHA');
 
     const newBranchName = `refs/heads/${issueTitle.split(' ').join('-')}`;

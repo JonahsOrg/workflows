@@ -39,8 +39,6 @@ jobs:
         uses: ./create-linked-branch
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.event.repository.name }}
           repo_id: ${{ github.event.repository.node_id }}
           issue_id: ${{ github.event.issue.node_id }}
           issue_title: ${{ github.event.issue.title }}
