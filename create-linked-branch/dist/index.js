@@ -32835,7 +32835,7 @@ async function run() {
     if (!latestCommitSHA) return console.log('could not get the latestCommitSHA');
 
     const newBranchName = `refs/heads/${issueTitle.split(' ').join('-')}`;
-    const res = await octokit.graphql(
+    const { createLinkedBranch: res } = await octokit.graphql(
       `
       mutation CreateNewBranch($branch: String!, $sha: GitObjectID!, $assignToIssue: ID!, $repoId: ID!) {
         createLinkedBranch(
