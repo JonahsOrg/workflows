@@ -60,13 +60,23 @@ async function run() {
     if (!latestCommitSHA) return console.log('could not get the latestCommitSHA');
 
     const newBranchName = `refs/heads/${issueTitle.split(' ').join('-')}`;
-    await octokit.graphql(
+    const res = await octokit.graphql(
       `
       mutation CreateNewBranch($branch: String!, $sha: GitObjectID!, $assignToIssue: ID!, $repoId: ID!) {
         createLinkedBranch(
           input: {name: $branch, oid: $sha, repositoryId: $repoId, issueId: $assignToIssue}
         ) {
-          clientMutationId 
+          issue {
+            id
+            title
+          }
+          linkedBranch {
+            id
+            ref {
+              prefix
+              name
+            }
+          }
         }
       }
       `,
@@ -77,6 +87,9 @@ async function run() {
         assignToIssue: issueId
       }
     );
+
+    console.log(res);
+    console.log(res?.issue, res?.linkedBranch);
 
     console.log('successfully created the linked branch');
   } catch (error) {
