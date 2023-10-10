@@ -32847,7 +32847,7 @@ async function run() {
     // grab the ids
     const cardId = node?.projectItems[0]?.node?.id;
     const projectId = node?.projectItems[0]?.node?.project?.id;
-
+    console.log(node);
     console.log(node?.projectItems[0]?.node);
 
     if (!cardId || !projectId) return;
