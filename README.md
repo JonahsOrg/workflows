@@ -8,6 +8,7 @@ Central hub for CI/CD workflows across our projects. Ensures consistency, stream
 - [x] Create an environment variable for the label and use it to create / add a label to a node
 - [ ] Make a regex pattern that branch names have to fit in order to be created
 - [X] Create environment variable for the branch to copy into a new feature branch
+- [ ] Use a json file to create / house the labels for a repository
 
 
 ## Create and publish a release through the command line
