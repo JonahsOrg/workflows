@@ -32864,7 +32864,7 @@ async function run() {
     );
 
     console.log(res);
-    console.log(res?.issue, res?.linkedBranch);
+    console.log(res?.issue, res?.linkedBranch, res?.linkedBranch?.ref);
 
     console.log('successfully created the linked branch');
   } catch (error) {
