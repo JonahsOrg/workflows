@@ -51,7 +51,6 @@ async function run() {
       }
     `,
       {
-        owner,
         repoId,
         branchName: branchToCopyRef
       }
