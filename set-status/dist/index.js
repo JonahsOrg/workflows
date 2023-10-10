@@ -32805,7 +32805,7 @@ async function run() {
     const octokit = new github.getOctokit(token);
 
     // fetch the ids of the parsed label and issue number
-    const res = await octokit.graphql(
+    const { node } = await octokit.graphql(
       `
       query FetchIds($issueId: ID!, $statusName: String!) {
         node(id: $issueId) {
@@ -32842,11 +32842,10 @@ async function run() {
       }
     );
 
-    console.log(res);
+    if (!node) return;
+    console.log(node.projectItems);
 
-    // if (!node) return;
-
-    // // grab the ids
+    // grab the ids
     // const cardId = node?.projectItems[0]?.node?.id;
     // const projectId = node?.projectItems[0]?.node?.project?.id;
     // console.log(node);
