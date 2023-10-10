@@ -52,6 +52,7 @@ jobs:
           linked_branch_name: ${{steps.create-linked-branch.outputs.linkedBranchName}}
           token: ${{ secrets.GITHUB_TOKEN }}
           repo_id: ${{ github.event.repository.node_id }}
+          issue_title: ${{ github.event.issue.title }}
           merge_into_branch: 'development'
 
       - name: create comment on new issue
