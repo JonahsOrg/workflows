@@ -47,7 +47,7 @@ async function run() {
                       field {
                         ... on ProjectV2SingleSelectField {
                           id # id of the field
-                          options (names: [$statusName]) {
+                          options (names: ["In Development"]) {
                             id  # id of specified field
                           }
                         }
