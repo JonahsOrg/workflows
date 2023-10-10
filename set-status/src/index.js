@@ -14,10 +14,9 @@ async function run() {
      * We need to fetch all the inputs that were provided to our action
      * and store them in variables for us to use.
      **/
-    const repoId = core.getInput('repo_id', { required: true });
-    const issueId = core.getInput('issue_id', { required: true });
+    const owner = core.getInput('owner', { required: true });
+    const repo = core.getInput('repo', { required: true });
     const token = core.getInput('token', { required: true });
-    const label = core.getInput('label', { required: true });
 
     /**
      * Now we need to create an instance of Octokit which will use to call
@@ -30,28 +29,34 @@ async function run() {
     const octokit = new github.getOctokit(token);
 
     // fetch the ids of the parsed label and issue number
-    const { node } = await octokit.graphql(
+    const { repository } = await octokit.graphql(
       `
-        query FetchLabelAndIssueIds($repoId: ID!, $labelName: String!) {
-          node(id: $repoId) {
-              ... on Repository {
-              label(name: $labelName) {
-                id
+        query FetchLabelAndIssueIds($owner: String!, $repo: String!, $labelName: String!) {
+          repository(owner: $owner, name: $repo) {
+            issue(number: $issueNumber) {
+              id # issue id
+              projectItems(first: 1) {
+                nodes {
+                  id # card id
+                  project {
+                    id # project id
+                  }
+                }
               }
             }
           }
         }
       `,
       {
-        repoId,
-        labelName: label
+        owner,
+        repo
       }
     );
 
-    if (!node) return;
+    if (!repository) return;
 
     // grab the ids
-    const labelId = node?.label?.id;
+    const labelId = repository?.label?.id;
     if (!labelId || !issueId) return;
 
     // labels the issue

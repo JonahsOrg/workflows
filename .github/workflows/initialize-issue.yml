@@ -10,7 +10,7 @@
 # no idea how to call organization variables
 
 name: Init new issue tickets
-run-name: New feature - ${{github.event.issue.title}}
+run-name: New issue - ${{github.event.issue.title}}
 
 on:
   issues:
@@ -30,8 +30,7 @@ jobs:
         uses: ./set-issue-label
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.event.repository.name }}
+          repo_id: ${{ github.event.repository.node_id }}
           issue_id: ${{ github.event.issue.node_id }}
           label: 'test'
 
@@ -63,6 +62,15 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           node_id: ${{ github.event.issue.node_id }}
+          issue_id: ${{ github.event.issue }}
+
+      # - name: change the status of a linked project card
+      #   id: set-status
+      #   uses: ./set-status
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     owner: ${{ github.repository_owner }}
+      #     repo: ${{ github.event.repository.name }}
 
       - name: Print Output
         id: output

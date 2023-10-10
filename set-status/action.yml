@@ -7,11 +7,14 @@ inputs:
  token:
   description: 'The token to use to access the GitHub API'
   required: true
- repo_id:
-  description: 'The node id of the repository'
+ owner:
+  description: 'The owner of the repository'
+  required: true
+ repo:
+  description: 'The name of the repository'
   required: true
  issue_id:
-  description: 'The node id of the issue'
+  description: 'The id of the issue'
   required: true
  label:
   description: 'The desired label for the issue'

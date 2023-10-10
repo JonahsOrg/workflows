@@ -9,6 +9,9 @@ Central hub for CI/CD workflows across our projects. Ensures consistency, stream
 - [ ] Make a regex pattern that branch names have to fit in order to be created
 - [X] Create environment variable for the branch to copy into a new feature branch
 - [ ] Use a json file to create / house the labels for a repository
+- [ ] Set success output variables on the steps that I can check to create a success comment
+- [ ] Set output variables on the pull request and issue ticket that I can use to link them together with comments
+  - [ ] ---or--- figure out a way to actually link the pr and issue tickets (probably with the branch somehow)
 
 
 ## Create and publish a release through the command line
