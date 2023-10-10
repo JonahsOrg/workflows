@@ -1,31 +1,31 @@
-name: 'Create a new linked branch on an issue'
+name: 'Create a new linked branch'
 description: 'Creates a linked branch for a new issue'
 author: 'jonah jackson'
 
 # Define your inputs here.
 inputs:
- token:
-  description: 'The token to use to access the GitHub API'
-  required: true
- owner:
-  description: 'The owner of the repository'
-  required: true
- repo:
-  description: 'The name of the repository'
-  required: true
- repo_id:
-  description: 'The id of the repository'
-  required: true
- issue_id:
-  description: 'The id of the issue'
-  required: true
- issue_title:
-  description: 'The title of the issue'
-  required: true
- branch_to_copy:
-  description: 'The name of the branch to copy to the new branch'
-  required: true
+  token:
+    description: 'The token to use to access the GitHub API'
+    required: true
+  owner:
+    description: 'The owner of the repository'
+    required: true
+  repo:
+    description: 'The name of the repository'
+    required: true
+  repo_id:
+    description: 'The id of the repository'
+    required: true
+  issue_id:
+    description: 'The id of the issue'
+    required: true
+  issue_title:
+    description: 'The title of the issue'
+    required: true
+  branch_to_copy:
+    description: 'The name of the branch to copy to the new branch'
+    required: true
 
 runs:
- using: node20
- main: dist/index.js
+  using: node20
+  main: dist/index.js

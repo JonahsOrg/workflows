@@ -32822,15 +32822,21 @@ async function run() {
     `,
    {
     repoId,
-    headRef: mergeIntoBranch,
-    baseRef: `${issueTitle.split(' ').join('-')}`,
+    headRef: `${issueTitle.split(' ').join('-')}`,
+    baseRef: mergeIntoBranch,
     pullName: `New feature - ${issueTitle}`
    }
   );
 
-  // const pullRequestURL = res?.createPullRequest?.pullRequest?.permalink;
-  // const pullRequestNum = res?.createPullRequest?.pullRequest?.number;
-  // const pullRequestId = res?.createPullRequest?.pullRequest?.id;
+  const pullRequestURL = res?.createPullRequest?.pullRequest?.permalink;
+  const pullRequestNum = res?.createPullRequest?.pullRequest?.number;
+  const pullRequestId = res?.createPullRequest?.pullRequest?.id;
+
+  console.log({
+   pullRequestURL,
+   pullRequestNum,
+   pullRequestId
+  });
 
   console.log('successfully created the pull request');
  } catch (error) {
