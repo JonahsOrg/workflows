@@ -32854,8 +32854,6 @@ async function run() {
 
     if (!cardId || !projectId || !fieldId || !optionId) return;
 
-    console.log({ cardId, projectId, fieldId, optionId });
-
     const payload = { singleSelectOptionId: optionId };
 
     // changes the card status in the project
