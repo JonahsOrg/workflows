@@ -70,7 +70,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           node_id: ${{ github.event.issue.node_id }}
-          message: 'Linked to pull request: ${{steps.create-pr.outputs.prNum}}'
+          message: 'Linked to pull request: #${{steps.create-pr.outputs.prNum}}'
 
       - name: mention the issue on the pr
         if: steps.create-pr.outcome == 'success'
@@ -79,7 +79,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           node_id: ${{ steps.create-pr.outputs.prId }}
-          message: 'Linked to issue: ${{github.event.issue.number}}'
+          message: 'Linked to issue: #${{github.event.issue.number}}'
 
       - name: Print Output
         id: output
