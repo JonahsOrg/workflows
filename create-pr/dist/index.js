@@ -32806,7 +32806,7 @@ async function run() {
      **/
     const octokit = new github.getOctokit(token);
 
-    /* const res =  */ await octokit.graphql(
+    const res = await octokit.graphql(
       `
     mutation CreateNewPullRequest ($prTitle: String!, $headRef: String!, $baseRef: String!, $repoId: ID!) {
       createPullRequest(
