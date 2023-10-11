@@ -10,14 +10,14 @@ inputs:
   repo_id:
     description: 'The id of the repository'
     required: true
-  merge_from_branch:
-    description: 'The branch name that the changes should be pulled from'
-    required: true
   pr_title:
     description: 'The title of the pull request'
     required: true
+  merge_from_branch:
+    description: 'The branch name that the changes should be pulled from'
+    required: true
   merge_into_branch:
-    description: 'The name of the branch to merge the new branch into'
+    description: 'The name of the branch to merge the changes into'
     required: true
 
 runs:

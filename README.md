@@ -8,7 +8,8 @@ Central hub for CI/CD workflows across our projects. Ensures consistency, stream
 - [x] Set an output variable of the linked branch name to use in create-pr
 - [x] Create an organization PAT for accessing projects
 - [x] Make a regex pattern that branch names have to fit in order to be created
-- [ ] change the names on the yml files to be more reusable (ex. create-pr uses a var called 'linked_branch_name', change to 'branch_name')
+- [x] change the variable names on the action files to be more reusable (ex. create-pr uses a var called 'linked_branch_name', change to 'branch_name')
+- [ ] link the pr and issue with comments
 - [ ] make a create repository action for a core repo 
   - [ ] create a repo
   - [ ] add the repo as a submodule to the repo

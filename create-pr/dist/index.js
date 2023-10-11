@@ -32817,6 +32817,7 @@ async function run() {
           permalink
           number
           id
+
         }
       }
     }
@@ -32828,16 +32829,11 @@ async function run() {
         prTitle
       }
     );
+    const pullRequestNum = res?.createPullRequest?.pullRequest?.number;
+    const pullRequestId = res?.createPullRequest?.pullRequest?.id;
 
-    /*   const pullRequestURL = res?.createPullRequest?.pullRequest?.permalink;
-  const pullRequestNum = res?.createPullRequest?.pullRequest?.number;
-  const pullRequestId = res?.createPullRequest?.pullRequest?.id;
-
-  console.log({
-   pullRequestURL,
-   pullRequestNum,
-   pullRequestId
-  }); */
+    core.setOutput('prNum', pullRequestNum);
+    core.setOutput('prId', pullRequestId);
 
     console.log('successfully created the pull request');
   } catch (error) {
