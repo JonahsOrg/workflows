@@ -32850,40 +32850,34 @@ async function run() {
     const cardId = projectNode?.id;
     const projectId = projectNode?.project?.id;
     const fieldId = projectNode?.fieldValueByName?.field?.id;
+    const optionId = projectNode?.fieldValueByName?.field?.options[0]?.id;
 
-    console.log('fieldId', fieldId);
+    if (!cardId || !projectId || !fieldId || !optionId) return;
 
-    console.log(projectNode?.fieldValueByName?.field);
-    console.log(projectNode?.fieldValueByName?.field?.options);
+    console.log({ cardId, projectId, fieldId, optionId });
 
-    console.log(projectNode);
-
-    if (!cardId || !projectId) return;
-
-    console.log({ cardId, projectId });
-
-    // const tempPayload = { singleSelectOptionId: '4b2fdd91' };
+    const payload = { singleSelectOptionId: optionId };
 
     // changes the card status in the project
-    // await octokit.graphql(
-    //   `
-    //   mutation UpdateStatusOfProjCard($item: ID!, $project: ID!, $field: ID!, $payload: ProjectV2FieldValue!) {
-    //     updateProjectV2ItemFieldValue(
-    //       input: {projectId: $project, itemId: $item, fieldId: $field, value: $payload}
-    //     ) {
-    //       projectV2Item {
-    //         id
-    //       }
-    //     }
-    //   }
-    //   `,
-    //   {
-    //     field: fieldId || 'PVTSSF_lAHOBk645c4AVbXfzgNsVfc',
-    //     item: projectCardId || 'PVTI_lAHOBk645c4AVbXfzgJgFoE',
-    //     project: projectId || 'PVT_kwHOBk645c4AVbXf',
-    //     payload: payloadObj || tempPayload
-    //   }
-    // );
+    await octokit.graphql(
+      `
+      mutation UpdateStatusOfProjCard($cardId: ID!, $project: ID!, $field: ID!, $payload: ProjectV2FieldValue!) {
+        updateProjectV2ItemFieldValue(
+          input: {projectId: $project, itemId: $cardId, fieldId: $field, value: $payload}
+        ) {
+          projectV2Item {
+            id
+          }
+        }
+      }
+      `,
+      {
+        field: fieldId,
+        cardId,
+        project: projectId,
+        payload
+      }
+    );
 
     console.log('successfully updated the status in the project');
   } catch (error) {
