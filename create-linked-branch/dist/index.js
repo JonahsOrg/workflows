@@ -32782,7 +32782,6 @@ const github = __nccwpck_require__(5438);
 function createBranchName(title) {
   // Convert to lowercase
   let branchName = title.toLowerCase();
-
   // Replace spaces with hyphens
   branchName = branchName.replace(/\s+/g, '-');
   // Remove special characters
@@ -32815,12 +32814,11 @@ async function run() {
     const issueTitle = core.getInput('issue_title', { required: true });
     const branchToCopy = core.getInput('branch_to_copy', { required: true });
 
-    const branchName = createBranchName(branchToCopy);
     // this is the branch that is copied for each new issue branch when it is opened
     // has to be formatted as refs/heads/<branch-name>
 
     // need to change this to force branch names to fit a regex pattern
-    const branchToCopyRef = `refs/heads/${branchName}`;
+    const branchToCopyRef = `refs/heads/${branchToCopy}`;
 
     /**
      * Now we need to create an instance of Octokit which will use to call
@@ -32855,7 +32853,10 @@ async function run() {
     const latestCommitSHA = node?.ref?.target?.oid;
     if (!latestCommitSHA) return console.log('could not get the latestCommitSHA');
 
-    const newBranchName = `refs/heads/${issueTitle.split(' ').join('-')}`;
+    // Example usage:
+    const branchName = createBranchName(issueTitle);
+    const branchNameRef = `refs/heads/${branchName}`;
+
     const { createLinkedBranch: res } = await octokit.graphql(
       `
       mutation CreateNewBranch($branch: String!, $sha: GitObjectID!, $assignToIssue: ID!, $repoId: ID!) {
@@ -32873,7 +32874,7 @@ async function run() {
       {
         repoId,
         sha: latestCommitSHA,
-        branch: newBranchName,
+        branch: branchNameRef,
         assignToIssue: issueId
       }
     );
