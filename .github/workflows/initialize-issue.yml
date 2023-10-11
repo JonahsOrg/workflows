@@ -55,14 +55,6 @@ jobs:
           merge_from_branch: ${{steps.create-linked-branch.outputs.linkedBranchName}} # derived from the create linked branch action -- must be exact
           merge_into_branch: 'development'
 
-      - name: change the status of a linked project card by an issue
-        id: set-status
-        uses: ./set-status
-        with:
-          token: ${{ secrets.ORGANIZATION_PAT }}
-          issue_id: ${{ github.event.issue.node_id }}
-          set_status_to: 'In Development'
-
       - name: mention the pr on the issue
         id: create-comment-on-issue
         if: steps.create-pr.outcome == 'success'
@@ -71,6 +63,14 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           node_id: ${{ github.event.issue.node_id }}
           message: 'Linked to pull request: #${{steps.create-pr.outputs.prNum}}'
+
+      - name: change the status of a linked project card by an issue
+        id: set-status
+        uses: ./set-status
+        with:
+          token: ${{ secrets.ORGANIZATION_PAT }}
+          issue_id: ${{ github.event.issue.node_id }}
+          set_status_to: 'In Development'
 
       - name: Print Output
         id: output
