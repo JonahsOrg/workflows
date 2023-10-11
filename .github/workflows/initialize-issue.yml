@@ -25,15 +25,6 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
-      - name: set label on issue
-        id: set-issue-label
-        uses: ./set-issue-label
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repo_id: ${{ github.event.repository.node_id }}
-          issue_id: ${{ github.event.issue.node_id }}
-          label: 'test'
-
       - name: create a linked branch from an issue
         id: create-linked-branch
         uses: ./create-linked-branch
@@ -71,6 +62,15 @@ jobs:
           token: ${{ secrets.ORGANIZATION_PAT }}
           issue_id: ${{ github.event.issue.node_id }}
           set_status_to: 'In Development'
+
+      - name: set label on issue
+        id: set-issue-label
+        uses: ./set-issue-label
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repo_id: ${{ github.event.repository.node_id }}
+          issue_id: ${{ github.event.issue.node_id }}
+          label: 'test'
 
       - name: Print Output
         id: output
