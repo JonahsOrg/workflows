@@ -63,15 +63,6 @@ jobs:
           issue_id: ${{ github.event.issue.node_id }}
           set_status_to: 'In Development'
 
-      - name: mention the pr on the issue
-        id: create-comment-on-issue
-        if: steps.create-pr.outcome == 'success'
-        uses: ./create-comment
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          node_id: ${{ github.event.issue.node_id }}
-          message: 'Linked to pull request: #${{steps.create-pr.outputs.prNum}}'
-
       - name: mention the issue on the pr
         if: steps.create-pr.outcome == 'success'
         id: create-comment-on-pr
