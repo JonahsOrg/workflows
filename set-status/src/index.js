@@ -69,11 +69,19 @@ async function run() {
 
     if (!node) return;
 
-    // grab the ids
-    const cardId = node?.projectItems?.nodes[0]?.id;
-    const projectId = node?.projectItems?.nodes[0]?.project?.id;
+    const projectNode = node?.projectItems?.nodes[0];
 
-    console.log(node?.projectItems?.nodes[0]);
+    // grab the ids
+    const cardId = projectNode?.id;
+    const projectId = projectNode?.project?.id;
+    const fieldId = projectNode?.fieldValueByName?.field?.id;
+
+    console.log('fieldId', fieldId);
+
+    console.log(projectNode?.fieldValueByName?.field);
+    console.log(projectNode?.fieldValueByName?.field?.options);
+
+    console.log(projectNode);
 
     if (!cardId || !projectId) return;
 
