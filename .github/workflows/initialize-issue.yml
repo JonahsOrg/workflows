@@ -49,10 +49,10 @@ jobs:
         if: steps.create-linked-branch.outcome == 'success'
         uses: ./create-pr
         with:
-          linked_branch_name: ${{steps.create-linked-branch.outputs.linkedBranchName}}
           token: ${{ secrets.GITHUB_TOKEN }}
           repo_id: ${{ github.event.repository.node_id }}
-          issue_title: ${{ github.event.issue.title }}
+          pr_title: 'New feature - ${{ github.event.issue.title }}'
+          merge_from_branch: ${{steps.create-linked-branch.outputs.linkedBranchName}} # derived from the create linked branch action -- must be exact
           merge_into_branch: 'development'
 
       - name: change the status of a linked project card

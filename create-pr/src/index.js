@@ -16,8 +16,8 @@ async function run() {
      **/
     const token = core.getInput('token', { required: true });
     const repoId = core.getInput('repo_id', { required: true });
-    const issueTitle = core.getInput('issue_title', { required: true });
-    const linkedBranchName = core.getInput('linked_branch_name', { required: true });
+    const prTitle = core.getInput('pr_title', { required: true });
+    const mergeFromBranch = core.getInput('merge_from_branch', { required: true });
     const mergeIntoBranch = core.getInput('merge_into_branch', { required: true });
     // mergeIntoBranch syntax ex. "staging", "development"
 
@@ -33,9 +33,9 @@ async function run() {
 
     /* const res =  */ await octokit.graphql(
       `
-    mutation CreateNewPullRequest ($pullName: String!, $headRef: String!, $baseRef: String!, $repoId: ID!) {
+    mutation CreateNewPullRequest ($prTitle: String!, $headRef: String!, $baseRef: String!, $repoId: ID!) {
       createPullRequest(
-        input: {baseRefName: $baseRef, headRefName: $headRef, title: $pullName, repositoryId: $repoId}
+        input: {baseRefName: $baseRef, headRefName: $headRef, title: $prTitle, repositoryId: $repoId}
       ) {
         pullRequest {
           title 
@@ -48,9 +48,9 @@ async function run() {
     `,
       {
         repoId,
-        headRef: linkedBranchName,
+        headRef: mergeFromBranch,
         baseRef: mergeIntoBranch,
-        pullName: `New feature - ${issueTitle}`
+        prTitle
       }
     );
 

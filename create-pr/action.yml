@@ -10,11 +10,11 @@ inputs:
   repo_id:
     description: 'The id of the repository'
     required: true
-  linked_branch_name:
-    description: 'The linked branch name of the issue'
+  merge_from_branch:
+    description: 'The branch name that the changes should be pulled from'
     required: true
-  issue_title:
-    description: 'The title of the issue'
+  pr_title:
+    description: 'The title of the pull request'
     required: true
   merge_into_branch:
     description: 'The name of the branch to merge the new branch into'
