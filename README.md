@@ -7,8 +7,20 @@ Central hub for CI/CD workflows across our projects. Ensures consistency, stream
 - [X] Create environment variable for the branch to copy into a new feature branch
 - [x] Set an output variable of the linked branch name to use in create-pr
 - [x] Create an organization PAT for accessing projects
-- [ ] Make a regex pattern that branch names have to fit in order to be created
-- [ ] Use a json file to create / house the labels for a repository
+- [x] Make a regex pattern that branch names have to fit in order to be created
+- [ ] change the names on the yml files to be more reusable (ex. create-pr uses a var called 'linked_branch_name', change to 'branch_name')
+- [ ] make a create repository action for a core repo 
+  - [ ] create a repo
+  - [ ] add the repo as a submodule to the repo
+- [ ] make a create release action for a repo
+- [ ] make a merge pull request action for a repo
+  - [ ] need to figure out what would trigger it, probably a label
+- [ ] make a "build" action for a repo
+  - [ ] run the build command for a repo and output to a desired location
+  - [ ] if core - detect all the submodules
+    - [ ] run a build command for each compiled to one app
+- [ ] figure out a way to do hot fixes / bug fixes -- don't really like having a specific status/column for them
+- [ ] ? Use a json file to manage the labels for a repo
 - [ ] ? Set success output variables on the steps that I can check to create a success comment
 - [ ] Set output variables on the pull request and issue ticket that I can use to link them together with comments
   - [ ] ---or--- figure out a way to actually link the pr and issue tickets (probably with the branch somehow)
