@@ -32779,6 +32779,26 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 
+function createBranchName(title) {
+  // Convert to lowercase
+  let branchName = title.toLowerCase();
+
+  // Replace spaces with hyphens
+  branchName = branchName.replace(/\s+/g, '-');
+  // Remove special characters
+  branchName = branchName.replace(/[^a-z0-9_-]/g, '');
+
+  // Optional: truncate if too long
+  // const maxLength = 50; // adjust as needed
+  // if (branchName.length > maxLength) {
+  //   branchName = branchName.substring(0, maxLength);
+  // }
+
+  // Optional: add prefix (e.g., "feature/")
+  branchName = 'feature/' + branchName;
+  return branchName;
+}
+
 /**
  * The main function for the action.
  * @returns {Promise<void>} Resolves when the action is complete.
@@ -32795,11 +32815,12 @@ async function run() {
     const issueTitle = core.getInput('issue_title', { required: true });
     const branchToCopy = core.getInput('branch_to_copy', { required: true });
 
+    const branchName = createBranchName(branchToCopy);
     // this is the branch that is copied for each new issue branch when it is opened
     // has to be formatted as refs/heads/<branch-name>
 
     // need to change this to force branch names to fit a regex pattern
-    const branchToCopyRef = `refs/heads/${branchToCopy}`;
+    const branchToCopyRef = `refs/heads/${branchName}`;
 
     /**
      * Now we need to create an instance of Octokit which will use to call
