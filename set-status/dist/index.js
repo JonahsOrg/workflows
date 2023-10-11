@@ -32846,14 +32846,14 @@ async function run() {
     console.log(node.projectItems);
 
     // grab the ids
-    // const cardId = node?.projectItems[0]?.node?.id;
-    // const projectId = node?.projectItems[0]?.node?.project?.id;
-    // console.log(node);
-    // console.log(node?.projectItems[0]?.node);
+    const cardId = node?.projectItems[0]?.id;
+    const projectId = node?.projectItems[0]?.project?.id;
 
-    // if (!cardId || !projectId) return;
+    console.log(node?.projectItems[0]);
 
-    // console.log({ cardId, projectId });
+    if (!cardId || !projectId) return;
+
+    console.log({ cardId, projectId });
 
     // const tempPayload = { singleSelectOptionId: '4b2fdd91' };
 
