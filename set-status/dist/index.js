@@ -32843,13 +32843,12 @@ async function run() {
     );
 
     if (!node) return;
-    console.log(node.projectItems);
 
     // grab the ids
-    const cardId = node?.projectItems[0]?.id;
-    const projectId = node?.projectItems[0]?.project?.id;
+    const cardId = node?.projectItems?.nodes[0]?.id;
+    const projectId = node?.projectItems?.nodes[0]?.project?.id;
 
-    console.log(node?.projectItems[0]);
+    console.log(node?.projectItems?.nodes[0]);
 
     if (!cardId || !projectId) return;
 
