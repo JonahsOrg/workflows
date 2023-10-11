@@ -16,8 +16,7 @@ async function run() {
      **/
     const issueId = core.getInput('issue_id', { required: true });
     const token = core.getInput('token', { required: true });
-
-    const statusName = 'In Development';
+    const setStatusTo = core.getInput('set_status_to', { required: true });
 
     /**
      * Now we need to create an instance of Octokit which will use to call
@@ -32,7 +31,7 @@ async function run() {
     // fetch the ids of the parsed label and issue number
     const { node } = await octokit.graphql(
       `
-      query FetchIds($issueId: ID!, $statusName: String!) {
+      query FetchIds($issueId: ID!, $setStatusTo: String!) {
         node(id: $issueId) {
           ... on Issue {
             projectItems(first: 10) {
@@ -47,7 +46,7 @@ async function run() {
                       field {
                         ... on ProjectV2SingleSelectField {
                           id # id of the field
-                          options (names: [$statusName]) {
+                          options (names: [$setStatusTo]) {
                             id  # id of specified field
                           }
                         }
@@ -63,7 +62,7 @@ async function run() {
       `,
       {
         issueId,
-        statusName
+        setStatusTo
       }
     );
 

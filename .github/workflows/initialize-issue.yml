@@ -61,6 +61,7 @@ jobs:
         with:
           token: ${{ secrets.ORGANIZATION_PAT }}
           issue_id: ${{ github.event.issue.node_id }}
+          set_status_to: 'In Development'
 
       - name: create comment on new issue
         id: create-comment
@@ -68,6 +69,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           node_id: ${{ github.event.issue.node_id }}
+          message: 'this is a test message.'
           # label_status: ${{steps.set-issue-label.outcome}}
           # branch_status: ${{steps.create-linked-branch.outcome}}
           # pr_status: ${{steps.create-pr.outcome}}
