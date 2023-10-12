@@ -4,12 +4,14 @@ Central hub for CI/CD workflows across our projects. Ensures consistency, stream
 
 ## Todo
 - [x] Create an environment variable for the label and use it to create / add a label to a node
-- [X] Create environment variable for the branch to copy into a new feature branch
+- [x] Create environment variable for the branch to copy into a new feature branch
 - [x] Set an output variable of the linked branch name to use in create-pr
 - [x] Create an organization PAT for accessing projects
 - [x] Make a regex pattern that branch names have to fit in order to be created
 - [x] change the variable names on the action files to be more reusable (ex. create-pr uses a var called 'linked_branch_name', change to 'branch_name')
 - [x] link the pr and issue with comments
+- [ ] change the trigger from the issue creation to attaching a label
+  - [ ] Use a json file to manage the labels for a repo
 - [ ] add a task list including the pr to the issue - https://docs.github.com/en/issues/managing-your-tasks-with-tasklists/about-tasklists
   - [ ] create an edit description action
 - [ ] make a create repository action for a core repo 
@@ -23,13 +25,11 @@ Central hub for CI/CD workflows across our projects. Ensures consistency, stream
   - [ ] if core - detect all the submodules
     - [ ] run a build command for each compiled to one app
 - [ ] figure out a way to do hot fixes / bug fixes -- don't really like having a specific status/column for them
-- [ ] ? Use a json file to manage the labels for a repo
-- [ ] ? Set success output variables on the steps that I can check to create a success comment
-- [ ] Set output variables on the pull request and issue ticket that I can use to link them together with comments
+- [ ] ? Use success output variables from the steps that checks before attaching a label to mark it ready / failed
+  - [ ] if failed attach a comment describing what failed
+- [x] Set output variables on the pull request and issue ticket that I can use to link them together with comments
   - [ ] ---or--- figure out a way to actually link the pr and issue tickets (probably with the branch somehow)
-- [ ] Add in error handling
-  - [ ] Create outputs for the actions indicating whether or not they were successful
-  - [ ] add error handling to set-status for when an issue is not linked to a project
+- [ ] add error handling to set-status for when an issue is not linked to a project
 - [ ] Create an action that deletes linked branches, pull requests, etc when the issue is something'd for ez clean up
 
 
