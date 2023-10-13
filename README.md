@@ -1,3 +1,5 @@
+[![GitHub Super-Linter](https://github.com/JonahsOrg/workflows/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
+
 # workflows
 Central hub for CI/CD workflows across our projects. Ensures consistency, streamlines updates, and fosters best practices. Workflows are versioned for reliable integration and deployment. Facilitates optimized automation for all repositories.
 
