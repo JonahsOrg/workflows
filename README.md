@@ -10,7 +10,17 @@ Central hub for CI/CD workflows across our projects. Ensures consistency, stream
 - [x] Make a regex pattern that branch names have to fit in order to be created
 - [x] change the variable names on the action files to be more reusable (ex. create-pr uses a var called 'linked_branch_name', change to 'branch_name')
 - [x] link the pr and issue with comments
-- [ ] change the trigger from the issue creation to attaching a label
+- [x] figure out a way to do hot fixes / bug fixes -- don't really like having a specific status/column for them
+  - [ ] use custom field properties -- like type = feature, bug, task, etc. 
+- [ ] Mark a branch as stale / needs rebase after becoming 30+ commits behind main
+- [ ] Lint a branch after a push
+  - [ ] https://github.com/super-linter/super-linter
+- [ ] Add/edit a changelog for a pull request on each commit to the branch
+- [ ] Add size to project cards
+- [ ] remove environment from custom fields
+- [ ] Create a template "core" repository that includes the basic github workflows for a core.
+- [ ] Create a template "submodule" repository that includes the basic github workflows for a submodule.
+- [ ] change the trigger from the issue creation to ? attaching a label or setting the type or etc
   - [ ] Use a json file to manage the labels for a repo
 - [ ] add a task list including the pr to the issue - https://docs.github.com/en/issues/managing-your-tasks-with-tasklists/about-tasklists
   - [ ] create an edit description action
@@ -24,7 +34,6 @@ Central hub for CI/CD workflows across our projects. Ensures consistency, stream
   - [ ] run the build command for a repo and output to a desired location
   - [ ] if core - detect all the submodules
     - [ ] run a build command for each compiled to one app
-- [ ] figure out a way to do hot fixes / bug fixes -- don't really like having a specific status/column for them
 - [ ] ? Use success output variables from the steps that checks before attaching a label to mark it ready / failed
   - [ ] if failed attach a comment describing what failed
 - [x] Set output variables on the pull request and issue ticket that I can use to link them together with comments
@@ -34,7 +43,7 @@ Central hub for CI/CD workflows across our projects. Ensures consistency, stream
 
 
 ## Create and publish a release through the command line
-| Step | Description | Command | Example |
+| Description | Command | Example |
 |------|-------------|---------|---------|
 | Ensure you're on the correct branch | `git checkout <branch-name>` | `git checkout main` |
 | Pull the latest changes | `git pull origin <branch-name>` | `git pull origin main` |
