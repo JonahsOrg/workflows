@@ -16,9 +16,11 @@ Central hub for CI/CD workflows across our projects. Ensures consistency, stream
 - [x] link the pr and issue with comments
 - [x] figure out a way to do hot fixes / bug fixes -- don't really like having a specific status/column for them
   - [ ] use custom field properties -- like type = feature, bug, task, etc. 
+- [ ] Cache github actions for better performance
+  - [ ] https://github.com/marketplace/actions/cache
 - [ ] Mark a branch as stale / needs rebase after becoming 30+ commits behind main
-- [ ] Lint a branch after a push
-  - [ ] https://github.com/super-linter/super-linter
+- [x] Lint a branch after a push
+  - [x] https://github.com/super-linter/super-linter
 - [ ] Add/edit a changelog for a pull request on each commit to the branch
 - [ ] Add size to project cards
 - [ ] remove environment from custom fields
