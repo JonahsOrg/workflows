@@ -32791,6 +32791,7 @@ async function run() {
      **/
     const token = core.getInput('token', { required: true });
     const nodeId = core.getInput('node_id', { required: true });
+    const message = core.getInput('message', { required: true });
 
     /**
      * Now we need to create an instance of Octokit which will use to call
@@ -32801,8 +32802,6 @@ async function run() {
      * https://octokit.github.io/rest.js/v18
      **/
     const octokit = new github.getOctokit(token);
-
-    const message = 'this is a test message';
 
     await octokit.graphql(
       `

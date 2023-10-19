@@ -25,16 +25,7 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
-      - name: set label on issue
-        id: set-issue-label
-        uses: ./set-issue-label
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repo_id: ${{ github.event.repository.node_id }}
-          issue_id: ${{ github.event.issue.node_id }}
-          label: 'test'
-
-      - name: create a linked branch
+      - name: create a linked branch from an issue
         id: create-linked-branch
         uses: ./create-linked-branch
         with:
@@ -44,33 +35,42 @@ jobs:
           issue_title: ${{ github.event.issue.title }}
           branch_to_copy: 'main'
 
-      - name: create a pull request
+      - name: create a pull request from a branch
         id: create-pr
         if: steps.create-linked-branch.outcome == 'success'
         uses: ./create-pr
         with:
-          linked_branch_name: ${{steps.create-linked-branch.outputs.linkedBranchName}}
           token: ${{ secrets.GITHUB_TOKEN }}
           repo_id: ${{ github.event.repository.node_id }}
-          issue_title: ${{ github.event.issue.title }}
+          pr_title: 'New feature - ${{ github.event.issue.title }}'
+          merge_from_branch: ${{steps.create-linked-branch.outputs.linkedBranchName}} # derived from the create linked branch action -- must be exact
           merge_into_branch: 'development'
 
-      - name: change the status of a linked project card
+      - name: mention the pr on the issue
+        id: create-comment-on-issue
+        if: steps.create-pr.outcome == 'success'
+        uses: ./create-comment
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          node_id: ${{ github.event.issue.node_id }}
+          message: 'Linked to pull request: #${{steps.create-pr.outputs.prNum}}'
+
+      - name: change the status of a linked project card by an issue
         id: set-status
         uses: ./set-status
         with:
           token: ${{ secrets.ORGANIZATION_PAT }}
           issue_id: ${{ github.event.issue.node_id }}
+          set_status_to: 'In Development'
 
-      - name: create comment on new issue
-        id: create-comment
-        uses: ./create-comment
+      - name: set label on issue
+        id: set-issue-label
+        uses: ./set-issue-label
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          node_id: ${{ github.event.issue.node_id }}
-          # label_status: ${{steps.set-issue-label.outcome}}
-          # branch_status: ${{steps.create-linked-branch.outcome}}
-          # pr_status: ${{steps.create-pr.outcome}}
+          repo_id: ${{ github.event.repository.node_id }}
+          issue_id: ${{ github.event.issue.node_id }}
+          label: 'test'
 
       - name: Print Output
         id: output

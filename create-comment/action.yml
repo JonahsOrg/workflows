@@ -10,15 +10,9 @@ inputs:
   node_id:
     description: 'The id of the node to add a comment to'
     required: true
-  # label_status:
-  #   description: 'The status of the set-label step'
-  #   required: true
-  # branch_status:
-  #   description: 'The status of the create-linked-branch step'
-  #   required: true
-  # pr_status:
-  #   description: 'The status of the create-pr step'
-  #   required: true
+  message:
+    description: 'The message for the body of the comment'
+    required: true
 
 runs:
   using: node20

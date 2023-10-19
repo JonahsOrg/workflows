@@ -32791,8 +32791,8 @@ async function run() {
      **/
     const token = core.getInput('token', { required: true });
     const repoId = core.getInput('repo_id', { required: true });
-    const issueTitle = core.getInput('issue_title', { required: true });
-    const linkedBranchName = core.getInput('linked_branch_name', { required: true });
+    const prTitle = core.getInput('pr_title', { required: true });
+    const mergeFromBranch = core.getInput('merge_from_branch', { required: true });
     const mergeIntoBranch = core.getInput('merge_into_branch', { required: true });
     // mergeIntoBranch syntax ex. "staging", "development"
 
@@ -32806,38 +32806,34 @@ async function run() {
      **/
     const octokit = new github.getOctokit(token);
 
-    /* const res =  */ await octokit.graphql(
+    const res = await octokit.graphql(
       `
-    mutation CreateNewPullRequest ($pullName: String!, $headRef: String!, $baseRef: String!, $repoId: ID!) {
+    mutation CreateNewPullRequest ($prTitle: String!, $headRef: String!, $baseRef: String!, $repoId: ID!) {
       createPullRequest(
-        input: {baseRefName: $baseRef, headRefName: $headRef, title: $pullName, repositoryId: $repoId}
+        input: {baseRefName: $baseRef, headRefName: $headRef, title: $prTitle, repositoryId: $repoId}
       ) {
         pullRequest {
           title 
           permalink
           number
           id
+
         }
       }
     }
     `,
       {
         repoId,
-        headRef: linkedBranchName,
+        headRef: mergeFromBranch,
         baseRef: mergeIntoBranch,
-        pullName: `New feature - ${issueTitle}`
+        prTitle
       }
     );
+    const pullRequestNum = res?.createPullRequest?.pullRequest?.number;
+    const pullRequestId = res?.createPullRequest?.pullRequest?.id;
 
-    /*   const pullRequestURL = res?.createPullRequest?.pullRequest?.permalink;
-  const pullRequestNum = res?.createPullRequest?.pullRequest?.number;
-  const pullRequestId = res?.createPullRequest?.pullRequest?.id;
-
-  console.log({
-   pullRequestURL,
-   pullRequestNum,
-   pullRequestId
-  }); */
+    core.setOutput('prNum', pullRequestNum);
+    core.setOutput('prId', pullRequestId);
 
     console.log('successfully created the pull request');
   } catch (error) {
