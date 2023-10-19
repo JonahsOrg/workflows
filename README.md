@@ -21,12 +21,7 @@ Central hub for CI/CD workflows across our projects. Ensures consistency, stream
 - [ ] if a ticket is created from an issue, it should be marked as a feature task 
 - [ ] Change the pull request creation to draft pull requests
   - [ ] have the dev mark it ready for review to notify code reviewers
-  - [ ] ```
-        on:
-            pull_request:
-              types:
-                - ready_for_review
-        ```
+  - [ ] ```on:   pull_request:   types:   - ready_for_review```
 - [ ] Cache github actions for better performance
   - [ ] https://github.com/marketplace/actions/cache
 - [ ] Mark a branch as stale / needs rebase after becoming 30+ commits behind main
