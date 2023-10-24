@@ -13,6 +13,9 @@ inputs:
   set_status_to:
     description: 'The name of the status to set the linked project card of the issue'
     required: true
+  project_number:
+    description: 'The number of the project to set the project card status in'
+    required: true
 
 runs:
   using: node20

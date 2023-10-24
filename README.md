@@ -4,6 +4,13 @@
 Central hub for CI/CD workflows across our projects. Ensures consistency, streamlines updates, and fosters best practices. Workflows are versioned for reliable integration and deployment. Facilitates optimized automation for all repositories.
 
 
+## Ideas
+- this could be good for projects --- https://github.blog/2023-08-28-10-things-you-didnt-know-you-could-do-with-github-projects/#7-add-issues-from-any-organization 
+  - could use a project column creation to create a submodule
+  - could then import the feature and bug issues into the project based on the app to track at a high-level overview
+- use a code owners file for reviewers --- https://github.blog/2017-07-06-introducing-code-owners/
+- use the type custom property on projects to distinguish the type of branch / if a branch should be created
+- could use have devs change status of issues to mark things, etc on the issue --- https://docs.github.com/en/rest/overview/issue-event-types?apiVersion=2022-11-28#moved_columns_in_project 
 
 
 ## Todo

@@ -62,6 +62,7 @@ jobs:
           token: ${{ secrets.ORGANIZATION_PAT }}
           issue_id: ${{ github.event.issue.node_id }}
           set_status_to: 'In Development'
+          project_number: 1
 
       - name: set label on issue
         id: set-issue-label
