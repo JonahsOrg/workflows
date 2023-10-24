@@ -32792,6 +32792,7 @@ async function run() {
     const issueId = core.getInput('issue_id', { required: true });
     const token = core.getInput('token', { required: true });
     const setStatusTo = core.getInput('set_status_to', { required: true });
+    const projectNumber = core.getInput('project_number', { required: true });
 
     /**
      * Now we need to create an instance of Octokit which will use to call
@@ -32806,15 +32807,15 @@ async function run() {
     // fetch the ids of the parsed label and issue number
     const { node } = await octokit.graphql(
       `
-      query FetchIds($issueId: ID!, $setStatusTo: String!) {
+      query FetchIds($issueId: ID!, $setStatusTo: String!, $projectNumber: Int!) {
         node(id: $issueId) {
           ... on Issue {
+            projectV2 (number: $projectNumber) {
+              id
+            }
             projectItems(first: 10) {
               nodes {
                 id # card id
-                project {
-                  id # project id
-                }
                 ... on ProjectV2Item {
                   fieldValueByName(name: "Status") {
                     ... on ProjectV2ItemFieldSingleSelectValue {
@@ -32837,19 +32838,22 @@ async function run() {
       `,
       {
         issueId,
-        setStatusTo
+        setStatusTo,
+        projectNumber: Number(projectNumber)
       }
     );
 
     if (!node) return;
 
-    const projectNode = node?.projectItems?.nodes[0];
+    const projectItemNode = node?.projectItems?.nodes[0];
 
+    console.log(node?.projectV2?.id);
     // grab the ids
-    const cardId = projectNode?.id;
-    const projectId = projectNode?.project?.id;
-    const fieldId = projectNode?.fieldValueByName?.field?.id;
-    const optionId = projectNode?.fieldValueByName?.field?.options[0]?.id;
+    const projectId = node?.projectV2?.id;
+
+    const cardId = projectItemNode?.id;
+    const fieldId = projectItemNode?.fieldValueByName?.field?.id;
+    const optionId = projectItemNode?.fieldValueByName?.field?.options[0]?.id;
 
     if (!cardId || !projectId || !fieldId || !optionId) return;
 
