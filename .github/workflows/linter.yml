@@ -57,6 +57,6 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_MARKDOWN: false
-          FILTER_REGEX_EXCLUDE: .**/dist/*
+          FILTER_REGEX_EXCLUDE: (.**/dist/*|./README.md)
           JAVASCRIPT_DEFAULT_STYLE: prettier
           VALIDATE_JSCPD: false
