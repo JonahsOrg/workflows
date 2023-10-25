@@ -10,7 +10,6 @@ const github = require('@actions/github');
  */
 async function run() {
   try {
-    const x = 0;
     /**
      * We need to fetch all the inputs that were provided to our action
      * and store them in variables for us to use.
