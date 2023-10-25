@@ -15,7 +15,7 @@
   "all": "npm run format:write && npm run lint && npm run package"
  },
  "eslintConfig": {
-  "extends": "./.github/linters/.eslintrc.yml"
+  "extends": "../.github/linters/.eslintrc.yml"
  },
  "author": "Jonah Jackson",
  "license": "ISC",
