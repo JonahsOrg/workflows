@@ -47,6 +47,17 @@ jobs:
           # list of changed files within `super-linter`
           fetch-depth: 0
 
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Dependencies
+        id: install
+        run: npm ci
+
       ################################
       # Run Linter against code base #
       ################################
@@ -58,3 +69,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_MARKDOWN: false
           FILTER_REGEX_EXCLUDE: .**/dist/*
+          JAVASCRIPT_DEFAULT_STYLE: prettier
+          VALIDATE_JSCPD: false
