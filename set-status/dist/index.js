@@ -32844,14 +32844,11 @@ async function run() {
     );
 
     if (!node) return;
-
     const projectItemNode = node?.projectItems?.nodes[0];
 
-    console.log(node?.projectV2?.id);
     // grab the ids
-    const projectId = node?.projectV2?.id;
-
     const cardId = projectItemNode?.id;
+    const projectId = node?.projectV2?.id;
     const fieldId = projectItemNode?.fieldValueByName?.field?.id;
     const optionId = projectItemNode?.fieldValueByName?.field?.options[0]?.id;
 
