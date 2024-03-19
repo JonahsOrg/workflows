@@ -64,7 +64,7 @@ Central hub for CI/CD workflows across our projects. Ensures consistency, stream
 
 ## Create and publish a release through the command line
 | Description | Command | Example |
-|------|-------------|---------|---------|
+|------|-------------|---------|
 | Ensure you're on the correct branch | `git checkout <branch-name>` | `git checkout main` |
 | Pull the latest changes | `git pull origin <branch-name>` | `git pull origin main` |
 | Update the version number | (Depends on your project, e.g., update `package.json`) | Edit `package.json` |
